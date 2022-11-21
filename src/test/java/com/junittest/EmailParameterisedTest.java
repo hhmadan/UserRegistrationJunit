@@ -1,4 +1,5 @@
 package com.junittest;
+import com.java.InvalidUserDetailsException;
 import com.java.UserRegistration;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class EmailParameterisedTest {
+public class EmailParameterisedTest{
     private final String input;
     private final boolean result;
     UserRegistration user;
@@ -23,9 +24,8 @@ public class EmailParameterisedTest {
         this.input = input;
         this.result = result;
     }
-
     @Test
-    public void testUserEmail() {
+    public void testUserEmail() throws InvalidUserDetailsException {
         assertEquals(result, UserRegistration.isValidEmail(input));
     }
 

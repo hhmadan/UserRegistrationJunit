@@ -5,50 +5,53 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserRegistration {
-    public static boolean validateNameRegex(String input){
+    public static boolean validateNameRegex(String input) throws InvalidUserDetailsException {
         String regex = "[A-Z][a-z]{2,}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
-        return matcher.matches();
+        boolean output = matcher.matches();
+        return output;
     }
-    public static void isValidFirstName(String fName) {      // validate first name
+    public static boolean isValidFirstName(String fName) throws InvalidUserDetailsException {      // validate first name
         if (validateNameRegex(fName)) {
             System.out.println("Your First Name ==> " + fName);
-        } else
-            System.out.println("Invalid Input..!\nPlease Enter Valid First Name with First Letter Capital And Minimum of 3 Letters");
+            return true;
+        }
+        throw new InvalidUserDetailsException("Invalid First Name");
     }
-    public static void isValidLastName(String lName){       // validate last name
+    public static boolean isValidLastName(String lName) throws InvalidUserDetailsException{       // validate last name
         if(validateNameRegex(lName)){
             System.out.println("Your Last Name ==> "+lName);
+            return true;
         }
         else
-            System.out.println("Invalid Input..!\nPlease Enter Valid Last Name with First Letter Capital And Minimum of 3 Letters");
+            throw new InvalidUserDetailsException("Invalid Last Name..!");
     }
-    public static boolean isValidEmail(String email){          // validate email-id
+    public static boolean isValidEmail(String email) throws InvalidUserDetailsException{          // validate email-id
         boolean output = false;
         String regex = "^[a-zA-Z0-9_-]+(?:\\.[a-zA-Z0-9_-]+)*@(?:[a-zA-Z0-9]+\\.)+[a-zA-Z]{2,5}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         output = matcher.matches();
-        if (output)
+        if (output){
             System.out.println("This is valid mail-id ==> " +email);
-        else
-            System.out.println("This is Invalid mail-id ==> " +email);
-        return output;
+            return true;
+        }
+        throw new InvalidUserDetailsException("This is Invalid mail-id ==> " +email);
     }
-    public static boolean isValidMobNum(String mobNum) {        // validation for mobile number
+    public static boolean isValidMobNum(String mobNum) throws InvalidUserDetailsException {        // validation for mobile number
         boolean output = false;
         String regex = "[0-9]{2}+\\s+[789][0-9]{9}";        // \\s provides single space
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(mobNum);
         output = matcher.matches();
-        if (output)
+        if (output) {
             System.out.println("Your Mobile Number ==> " + mobNum);
-//        else
-//            System.out.println("Invalid Input..!");
-        return output;
+            return true;
+        }
+        throw new InvalidUserDetailsException("Invalid Mobile Number..!");
     }
-    public static boolean isValidPassword(String password){     // validation for password
+    public static boolean isValidPassword(String password) throws  InvalidUserDetailsException{     // validation for password
         // Rule1-Password can be alphanumeric with minimum 8 and above characters
         // Rule2-Password must have at least 1 Upper case letter
         // Rule3-Password must have at least 1 numeric
@@ -62,13 +65,13 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         output = matcher.matches();
-        if(output)
+        if(output){
             System.out.println("Great..! Perfect Password");
-//        else
-//            System.out.println("Invalid Input..!");
-        return output;
+            return true;
+        }
+        throw new InvalidUserDetailsException("Invalid Password..!");
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws InvalidUserDetailsException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name: ");
         String fName = sc.next();
