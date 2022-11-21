@@ -24,10 +24,10 @@ public class EmailParameterisedTest{
         this.input = input;
         this.result = result;
     }
-    @Test
-    public void testUserEmail() throws InvalidUserDetailsException {
-        assertEquals(result, UserRegistration.isValidEmail(input));
-    }
+//    @Test
+//    public void testUserEmail() throws InvalidUserDetailsException {
+//        assertEquals(result, UserRegistration.isValidEmail(input));
+//    }
 
     @Parameters
     public static Collection emails() {

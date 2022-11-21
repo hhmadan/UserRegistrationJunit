@@ -9,32 +9,38 @@ import static junit.framework.TestCase.*;
 public class TestLogic {
     @Test
     public void validateFirstLastName()throws InvalidUserDetailsException {
-        //assertEquals(false,UserRegistration.validateNameRegex("firstname"));
-        assertTrue(UserRegistration.isValidFirstName("Firstname"));
+        UserRegistration user = new UserRegistration();
+        boolean output = user.isValidFirstName.ValidateUserEntries("Firstname");
+        assertTrue(output);
+
+        // Custom exception for invalid lastname
         try {
-            UserRegistration.isValidLastName("lastname");
+            user.isValidLastName.ValidateUserEntries("lastname");
         }
-        catch(InvalidUserDetailsException ie){
-            System.out.println("Invalid Name");
+        catch(InvalidUserDetailsException ie) {
+            //assertEquals("Invalid Last Name..!",ie.getMessage());
+            System.out.println(ie.getMessage());
         }
-        //assertFalse(UserRegistration.validateNameRegex("lastname"));
     }
     @Test
     public void validateEmail()throws InvalidUserDetailsException {
-        assertTrue(UserRegistration.isValidEmail("abc@bl.co"));
+        UserRegistration user = new UserRegistration();
+        boolean output = user.isValidEmail.ValidateUserEntries("abc@bl.co");
+        assertTrue(output);
         try{
-            UserRegistration.isValidEmail(".abc@bl.co");
+            user.isValidEmail.ValidateUserEntries(".abc@bl.co");
         }
-        catch (InvalidUserDetailsException ie){
+        catch (InvalidUserDetailsException ie) {
             System.out.println(ie.getMessage());
         }
-        //assertFalse(UserRegistration.isValidEmail(".abc@bl.co"));
     }
     @Test
-    public void validateMobile()throws InvalidUserDetailsException {
-        assertTrue(UserRegistration.isValidMobNum("91 8989898989"));
+    public void validateMobile() throws InvalidUserDetailsException {
+        UserRegistration user = new UserRegistration();
+        boolean output = user.isValidMobNum.ValidateUserEntries("91 8989898989");
+        assertTrue(output);
         try{
-            UserRegistration.isValidMobNum("91-8989898989");
+            user.isValidMobNum.ValidateUserEntries("91-8989898989");
         } catch (InvalidUserDetailsException ie) {
             System.out.println(ie.getMessage());
         }
@@ -42,9 +48,11 @@ public class TestLogic {
     }
     @Test
     public void validatePassword()throws InvalidUserDetailsException {
-        assertTrue(UserRegistration.isValidPassword("Pass9@word"));
+        UserRegistration user = new UserRegistration();
+        boolean output = user.isValidPassword.ValidateUserEntries("Pass9@word");
+        assertTrue(output);
         try{
-            UserRegistration.isValidPassword("pass");
+            user.isValidPassword.ValidateUserEntries("pass");
         }
         catch (InvalidUserDetailsException ie){
             System.out.println(ie.getMessage());
